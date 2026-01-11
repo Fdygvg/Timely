@@ -1,7 +1,7 @@
 import { Plus, X } from 'lucide-react';
 import { useState } from 'react';
-import Button from '../Layout/Button';
-import Modal from '../Layout/Modal';
+import Button from '../layout/Button';
+import Modal from '../layout/Modal';
 import { api } from '../../utils/api';
 
 const ShortcutBar = ({ shortcuts = [], onAddShortcut, onSelectShortcut, onDeleteShortcut }) => {
@@ -12,7 +12,7 @@ const ShortcutBar = ({ shortcuts = [], onAddShortcut, onSelectShortcut, onDelete
 
   const handleAddShortcut = async () => {
     if (!key.trim() || !text.trim()) return;
-    
+
     setLoading(true);
     try {
       await api.post('/user/shortcuts', { key: key.toUpperCase(), text });
@@ -47,7 +47,7 @@ const ShortcutBar = ({ shortcuts = [], onAddShortcut, onSelectShortcut, onDelete
             </button>
           </div>
         ))}
-        
+
         <button
           onClick={() => setShowAddModal(true)}
           className="px-3 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 transition-colors flex items-center space-x-2"

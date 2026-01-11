@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { User, Check, X } from 'lucide-react';
-import Modal from '../Layout/Modal';
-import Button from '../Layout/Button';
+import Modal from '../layout/Modal';
+import Button from '../layout/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { getRandomAvatar } from '../../utils/helpers';
 

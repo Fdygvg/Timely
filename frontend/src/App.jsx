@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import Layout from './components/Layout/Layout';
+import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import StackPage from './pages/StackPage';
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           {/* Public routes without layout */}
           <Route path="/" element={<Home />} />
-          
+
           {/* Protected routes with layout */}
           <Route element={<Layout />}>
             <Route path="/dashboard" element={<Dashboard />} />

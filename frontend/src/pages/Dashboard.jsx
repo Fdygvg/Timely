@@ -7,7 +7,7 @@ import ProfileSetupModal from '../components/auth/ProfileSetupModal';
 import StreakCard from '../components/dashboard/StreakCard';
 import StackCard from '../components/dashboard/StackCard';
 import CreateStackModal from '../components/dashboard/CreateStackModal';
-import Button from '../components/Layout/Button';
+import Button from '../components/layout/Button';
 
 const Dashboard = () => {
   const { user, checkAuth } = useAuth();

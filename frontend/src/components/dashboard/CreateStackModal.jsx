@@ -11,8 +11,8 @@ import {
   Bell,
   AlertCircle
 } from 'lucide-react';
-import Modal from '../Layout/Modal';
-import Button from '../Layout/Button';
+import Modal from '../layout/Modal';
+import Button from '../layout/Button';
 import { getCurrentDate, vibrate } from '../../utils/helpers';
 
 const CreateStackModal = ({

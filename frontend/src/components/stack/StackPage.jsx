@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Plus, Play } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Button from '../Layout/Button';
+import Button from '../layout/Button';
 import ShortcutBar from './ShortcutBar';
 import StackItemCard from './StackItemCard';
 import { api } from '../../utils/api';

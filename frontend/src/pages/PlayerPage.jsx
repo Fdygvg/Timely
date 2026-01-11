@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Play, Pause, SkipForward, Home, RotateCcw, Volume2, VolumeX, Vibrate } from 'lucide-react';
-import Button from '../components/Layout/Button';
+import Button from '../components/layout/Button';
 import { api } from '../utils/api';
 import { useAuth } from '../hooks/useAuth';
 import { vibrate, formatTime } from '../utils/helpers';

@@ -1,7 +1,7 @@
 import { Home, RotateCcw, Trophy, Clock, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Modal from '../Layout/Modal';
-import Button from '../Layout/Button';
+import Modal from '../layout/Modal';
+import Button from '../layout/Button';
 import { formatTime } from '../../utils/helpers';
 
 const CompletionModal = ({
@@ -13,7 +13,7 @@ const CompletionModal = ({
   stackName = ''
 }) => {
   const confettiCount = 50;
-  
+
   return (
     <Modal
       isOpen={isOpen}
