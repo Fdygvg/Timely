@@ -15,9 +15,21 @@ const app = express();
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
+// Build allowed origins from environment
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:7173",
+  "https://timely-jet.vercel.app",
+];
+
+// Add production frontend URL if configured
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:7173"],
+    origin: allowedOrigins,
     credentials: true,
   })
 );
