@@ -1,0 +1,121 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const userSchema = new mongoose.Schema({
+  // Hashed token (acts as password)
+  hashedToken: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  
+  username: {
+    type: String,
+    trim: true,
+    minlength: 2,
+    maxlength: 30
+  },
+  
+  avatar: {
+    type: String,
+    default: 'avatar1' // avatar1, avatar2, etc.
+  },
+  
+  streak: {
+    current: {
+      type: Number,
+      default: 0
+    },
+    lastActive: {
+      type: Date,
+      default: null
+    },
+    longest: {
+      type: Number,
+      default: 0
+    }
+  },
+  
+  stats: {
+    totalSessions: {
+      type: Number,
+      default: 0
+    },
+    totalTime: { // in seconds
+      type: Number,
+      default: 0
+    },
+    totalItems: {
+      type: Number,
+      default: 0
+    }
+  },
+  
+  shortcuts: [{
+    key: {
+      type: String,
+      trim: true,
+      uppercase: true,
+      maxlength: 3
+    },
+    text: {
+      type: String,
+      trim: true,
+      maxlength: 200
+    }
+  }],
+  
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    immutable: true
+  }
+}, {
+  timestamps: true
+});
+
+// Hash token before saving
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('hashedToken')) return next();
+  
+  try {
+    const salt = await bcrypt.genSalt(12);
+    this.hashedToken = await bcrypt.hash(this.hashedToken, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Compare token
+userSchema.methods.compareToken = async function(candidateToken) {
+  return await bcrypt.compare(candidateToken, this.hashedToken);
+};
+
+// Update streak
+userSchema.methods.updateStreak = function() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const lastActive = this.streak.lastActive 
+    ? new Date(this.streak.lastActive).setHours(0, 0, 0, 0)
+    : null;
+  
+  if (!lastActive || lastActive < today.getTime() - 86400000) {
+    // Broken streak
+    this.streak.current = 1;
+  } else if (lastActive === today.getTime()) {
+    // Already updated today
+    return;
+  } else {
+    // Consecutive day
+    this.streak.current += 1;
+  }
+  
+  this.streak.lastActive = new Date();
+  this.streak.longest = Math.max(this.streak.longest, this.streak.current);
+};
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
