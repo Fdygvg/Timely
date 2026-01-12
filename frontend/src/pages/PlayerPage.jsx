@@ -90,11 +90,13 @@ const PlayerPage = () => {
     if (timeLeft === 0 && isPlaying && !isTransitioningRef.current) {
       // 1. Play Effects
       playSound();
-      if (settings.vibrations > 0) {
+
+      const vibrationCount = parseInt(settings.vibrations || 0, 10);
+      if (vibrationCount > 0) {
         const pattern = [];
-        for (let i = 0; i < settings.vibrations; i++) {
+        for (let i = 0; i < vibrationCount; i++) {
           pattern.push(200);
-          if (i < settings.vibrations - 1) pattern.push(100);
+          if (i < vibrationCount - 1) pattern.push(100);
         }
         vibrate(pattern);
       }

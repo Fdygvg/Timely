@@ -55,9 +55,20 @@ export const copyToClipboard = async (text) => {
 
 // Vibrate phone (if supported)
 export const vibrate = (pattern = 200) => {
-  console.log('Vibrating with pattern:', pattern);
-  if (typeof navigator !== 'undefined' && navigator.vibrate) {
-    navigator.vibrate(pattern);
+  if (typeof navigator === 'undefined' || !navigator.vibrate) {
+    console.warn('Vibration API not supported on this device/browser');
+    return;
+  }
+
+  try {
+    // Ensure pattern is array or number
+    const finalPattern = Array.isArray(pattern) ? pattern : [pattern];
+
+    // Attempt vibration
+    const success = navigator.vibrate(finalPattern);
+    console.log(`Vibration attempted: ${success ? 'Success' : 'Failed/Blocked'}`, finalPattern);
+  } catch (err) {
+    console.error('Vibration error:', err);
   }
 };
 

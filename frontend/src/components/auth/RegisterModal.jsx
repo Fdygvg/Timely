@@ -247,13 +247,13 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
             {/* Actions */}
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button
-                onClick={handleProceed}
+                onClick={onSwitchToLogin} // Switch to login modal instead of just closing
                 variant="primary"
                 size="large"
                 disabled={!savedWarning}
                 fullWidth
               >
-                Proceed to Dashboard
+                Proceed to Login
               </Button>
 
               <Button

@@ -42,8 +42,7 @@ export const AuthProvider = ({ children }) => {
       const rawToken = response.data.token;
       localStorage.setItem("temp_token", rawToken);
 
-      // Automatically login after registration
-      await login(rawToken);
+      // Do NOT auto-login. User must see token and login manually.
 
       return {
         success: true,

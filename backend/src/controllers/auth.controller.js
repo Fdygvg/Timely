@@ -40,11 +40,7 @@ const register = async (req, res) => {
 
     await user.save();
 
-    // Generate JWT for immediate login
-    const jwtToken = generateToken(user._id);
-    setAuthCookie(res, jwtToken);
-
-    // Return raw token ONCE for user to save
+    // Return raw token ONCE for user to save - DO NOT auto-login
     res.status(201).json({
       message: 'Account created successfully!',
       token: rawToken, // Show this once - never store in DB

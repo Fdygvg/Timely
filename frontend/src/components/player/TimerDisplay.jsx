@@ -38,7 +38,7 @@ const TimerDisplay = ({
             key={timeLeft}
             initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
-            className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white font-mono mb-2"
+            className="text-5xl md:text-8xl font-bold text-gray-900 dark:text-white font-mono mb-2"
           >
             {formatTime(timeLeft)}
           </motion.div>
