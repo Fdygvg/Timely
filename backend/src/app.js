@@ -12,6 +12,7 @@ const stackRoutes = require("./routes/stack.routes");
 const app = express();
 
 // Middleware
+app.set('trust proxy', 1); // Trust first proxy (Render/Vercel)
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());

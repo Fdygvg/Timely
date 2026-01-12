@@ -13,11 +13,14 @@ const generateToken = (userId) => {
 };
 
 // Set auth cookie
+// Set auth cookie
 const setAuthCookie = (res, token) => {
+  const isProduction = process.env.NODE_ENV === 'production';
+
   res.cookie('token', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
+    secure: isProduction, // Must be true for SameSite=None
+    sameSite: isProduction ? 'none' : 'lax', // Allow cross-site in production
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
   });
 };
@@ -27,18 +30,18 @@ const register = async (req, res) => {
   try {
     // Generate a secure token
     const rawToken = generateSecureToken(64); // 64 bytes = 128 hex chars
-    
+
     // Create user with hashed token
     const user = new User({
       hashedToken: rawToken // Will be hashed by pre-save middleware
     });
-    
+
     await user.save();
-    
+
     // Generate JWT for immediate login
     const jwtToken = generateToken(user._id);
     setAuthCookie(res, jwtToken);
-    
+
     // Return raw token ONCE for user to save
     res.status(201).json({
       message: 'Account created successfully!',
@@ -46,16 +49,16 @@ const register = async (req, res) => {
       userId: user._id,
       warning: 'Save this token securely! You will need it to log in.'
     });
-    
+
   } catch (error) {
     console.error('Registration error:', error);
     if (error.code === 11000) {
-      return res.status(409).json({ 
-        error: 'Token conflict. Please try again.' 
+      return res.status(409).json({
+        error: 'Token conflict. Please try again.'
       });
     }
-    res.status(500).json({ 
-      error: 'Registration failed. Please try again.' 
+    res.status(500).json({
+      error: 'Registration failed. Please try again.'
     });
   }
 };
@@ -64,17 +67,17 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { token } = req.body;
-    
+
     if (!token || token.length !== 128) {
-      return res.status(400).json({ 
-        error: 'Invalid token format. Token must be 128 characters.' 
+      return res.status(400).json({
+        error: 'Invalid token format. Token must be 128 characters.'
       });
     }
-    
+
     // Find user by comparing hashed tokens
     const users = await User.find({});
     let user = null;
-    
+
     // Need to check all users since token is hashed
     for (const u of users) {
       const isMatch = await u.compareToken(token);
@@ -83,21 +86,21 @@ const login = async (req, res) => {
         break;
       }
     }
-    
+
     if (!user) {
-      return res.status(401).json({ 
-        error: 'Invalid token. Please check and try again.' 
+      return res.status(401).json({
+        error: 'Invalid token. Please check and try again.'
       });
     }
-    
+
     // Update streak
     user.updateStreak();
     await user.save();
-    
+
     // Generate JWT
     const jwtToken = generateToken(user._id);
     setAuthCookie(res, jwtToken);
-    
+
     res.json({
       message: 'Login successful!',
       user: {
@@ -108,11 +111,11 @@ const login = async (req, res) => {
         hasProfile: !!user.username
       }
     });
-    
+
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ 
-      error: 'Login failed. Please try again.' 
+    res.status(500).json({
+      error: 'Login failed. Please try again.'
     });
   }
 };
@@ -126,11 +129,11 @@ const logout = (req, res) => {
 // Check auth status
 const checkAuth = async (req, res) => {
   if (!req.user) {
-    return res.status(401).json({ 
-      authenticated: false 
+    return res.status(401).json({
+      authenticated: false
     });
   }
-  
+
   res.json({
     authenticated: true,
     user: {
