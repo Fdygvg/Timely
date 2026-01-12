@@ -34,7 +34,7 @@ const ShortcutBar = ({ shortcuts = [], onAddShortcut, onSelectShortcut, onDelete
           <div key={index} className="flex items-center group">
             <button
               onClick={() => onSelectShortcut(shortcut.text)}
-              className="px-3 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:from-blue-500/20 hover:to-purple-500/20 text-blue-600 dark:text-blue-400 font-medium rounded-xl border border-blue-200 dark:border-blue-800 transition-all hover:-translate-y-0.5 active:translate-y-0"
+              className="px-3 py-2 bg-gradient-to-r from-green-500/10 to-yellow-500/10 hover:from-green-500/20 hover:to-yellow-500/20 text-green-600 dark:text-green-400 font-medium rounded-xl border border-green-200 dark:border-green-800 transition-all hover:-translate-y-0.5 active:translate-y-0"
             >
               [{shortcut.key}]
             </button>
@@ -73,13 +73,13 @@ const ShortcutBar = ({ shortcuts = [], onAddShortcut, onSelectShortcut, onDelete
               type="text"
               value={key}
               onChange={(e) => setKey(e.target.value.toUpperCase())}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-              placeholder="T"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+              placeholder="I"
               maxLength={3}
               autoFocus
             />
             <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              This will appear as [T] in the shortcut bar
+              This will appear as [I] in the shortcut bar
             </p>
           </div>
 
@@ -90,8 +90,8 @@ const ShortcutBar = ({ shortcuts = [], onAddShortcut, onSelectShortcut, onDelete
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
-              placeholder="Thank you Jesus for life"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors resize-none"
+              placeholder="Input Shortcut Text"
               rows={3}
               maxLength={200}
             />

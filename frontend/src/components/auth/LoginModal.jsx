@@ -76,8 +76,8 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
       <div className="p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Info Box */}
-          <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
-            <p className="text-sm text-blue-800 dark:text-blue-300">
+          <div className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-xl p-4">
+            <p className="text-sm text-green-800 dark:text-green-300">
               <strong>No password needed!</strong> Use the 128-character token you received when you registered. If you lost it, you'll need to create a new account.
             </p>
           </div>
@@ -96,7 +96,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
                   setError('');
                 }}
                 placeholder="Enter your 128-character token"
-                className="w-full px-4 py-3 pr-24 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400 transition-all"
+                className="w-full px-4 py-3 pr-24 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-400 dark:focus:border-green-400 transition-all"
                 spellCheck="false"
                 autoComplete="off"
               />
@@ -152,7 +152,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
                   setTimeout(() => setCopied(false), 2000);
                 }}
                 disabled={!token}
-                className="flex items-center space-x-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center space-x-1 text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Copy size={14} />
                 <span>{copied ? 'Copied!' : 'Copy'}</span>
@@ -179,7 +179,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
               <button
                 type="button"
                 onClick={handleCopyExample}
-                className="text-blue-600 dark:text-blue-400 hover:underline text-sm"
+                className="text-green-600 dark:text-green-400 hover:underline text-sm"
               >
                 View example token format →
               </button>
@@ -218,7 +218,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
                   onClose();
                   onSwitchToRegister();
                 }}
-                className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+                className="text-green-600 dark:text-green-400 font-semibold hover:underline"
               >
                 Create one now
               </button>

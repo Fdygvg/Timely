@@ -42,17 +42,17 @@ const TimerDisplay = ({
           >
             {formatTime(timeLeft)}
           </motion.div>
-          
+
           {/* Pulsing ring when playing */}
           {isPlaying && (
             <motion.div
-              className="absolute inset-0 rounded-full border-4 border-blue-500/30"
+              className="absolute inset-0 rounded-full border-4 border-green-500/30"
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           )}
         </div>
-        
+
         <div className="text-gray-500 dark:text-gray-400 text-sm">
           Default: {formatTime(totalDuration)}
         </div>
@@ -62,7 +62,7 @@ const TimerDisplay = ({
       <div className="mb-8">
         <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+            className="h-full bg-gradient-to-r from-green-500 to-yellow-500"
             initial={{ width: '0%' }}
             animate={{ width: `${progressPercentage}%` }}
             transition={{ duration: 1 }}
@@ -86,10 +86,10 @@ const TimerDisplay = ({
             >
               <Minus size={24} />
             </button>
-            
+
             <button
               onClick={onPlayPause}
-              className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 flex items-center justify-center"
+              className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-green-600 to-yellow-600 text-white shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 flex items-center justify-center"
               aria-label={isPlaying ? 'Pause' : 'Play'}
             >
               {isPlaying ? (
@@ -98,7 +98,7 @@ const TimerDisplay = ({
                 <Play size={32} className="md:size-40 ml-1" />
               )}
             </button>
-            
+
             <button
               onClick={() => handleAdjustTime(5)}
               className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 hover:bg-green-200 dark:hover:bg-green-800/50 transition-colors shadow-lg flex items-center justify-center"

@@ -1,4 +1,4 @@
-import { Flame, TrendingUp, Calendar, Target } from 'lucide-react';
+import { Flame, TrendingUp, Calendar, Target, Lightbulb } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
@@ -21,7 +21,7 @@ const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-gray-800 dark:to-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6 shadow-lg"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
             <p className="text-sm text-gray-600 dark:text-gray-300">{getMotivation()}</p>
           </div>
         </div>
-        
+
         <div className="text-right">
           <div className="text-4xl font-bold text-amber-600 dark:text-amber-400">{streak}</div>
           <div className="text-sm text-gray-600 dark:text-gray-300">days</div>
@@ -51,7 +51,7 @@ const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
           <span>{progress.toFixed(0)}%</span>
         </div>
         <div className="h-3 bg-amber-100 dark:bg-amber-900/30 rounded-full overflow-hidden">
-          <motion.div 
+          <motion.div
             className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
@@ -64,7 +64,7 @@ const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 border border-amber-100 dark:border-amber-800/30">
           <div className="flex items-center space-x-2 mb-2">
-            <Target size={16} className="text-blue-500" />
+            <Target size={16} className="text-green-500" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Sessions</span>
           </div>
           <div className="text-2xl font-bold text-gray-900 dark:text-white">{totalSessions}</div>
@@ -72,7 +72,7 @@ const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
 
         <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 border border-amber-100 dark:border-amber-800/30">
           <div className="flex items-center space-x-2 mb-2">
-            <Calendar size={16} className="text-green-500" />
+            <Calendar size={16} className="text-emerald-500" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Time</span>
           </div>
           <div className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -82,7 +82,7 @@ const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
 
         <div className="bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 border border-amber-100 dark:border-amber-800/30">
           <div className="flex items-center space-x-2 mb-2">
-            <TrendingUp size={16} className="text-purple-500" />
+            <TrendingUp size={16} className="text-yellow-500" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Next Goal</span>
           </div>
           <div className="text-2xl font-bold text-gray-900 dark:text-white">{nextMilestone}</div>
@@ -95,7 +95,11 @@ const StreakCard = ({ streak = 0, totalSessions = 0, totalTime = 0 }) => {
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Today</span>
           </div>
           <div className="text-2xl font-bold text-gray-900 dark:text-white">
-            {streak > 0 ? '🔥' : '💡'}
+            {streak > 0 ? (
+              <Flame size={24} className="text-orange-500 fill-orange-500" />
+            ) : (
+              <Lightbulb size={24} className="text-yellow-500" />
+            )}
           </div>
           <div className="text-xs text-gray-500 dark:text-gray-400">
             {streak > 0 ? 'On fire!' : 'Start now'}

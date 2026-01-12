@@ -1,4 +1,4 @@
-import { Home, RotateCcw, Trophy, Clock, CheckCircle } from 'lucide-react';
+import { Home, RotateCcw, Trophy, Clock, CheckCircle, PartyPopper, Flame } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Modal from '../layout/Modal';
 import Button from '../layout/Button';
@@ -59,8 +59,8 @@ const CompletionModal = ({
         </motion.div>
 
         {/* Title */}
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-          Session Complete! 🎉
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 flex items-center justify-center gap-2">
+          Session Complete! <PartyPopper className="text-yellow-500" size={24} />
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-8">
           {stackName && `You finished "${stackName}"`}
@@ -72,10 +72,10 @@ const CompletionModal = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-4"
+            className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-4"
           >
             <div className="flex items-center justify-center space-x-2 mb-2">
-              <Clock size={20} className="text-blue-500" />
+              <Clock size={20} className="text-green-500" />
               <span className="font-medium text-gray-700 dark:text-gray-300">
                 Total Time
               </span>
@@ -89,10 +89,10 @@ const CompletionModal = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-4"
+            className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 rounded-xl p-4"
           >
             <div className="flex items-center justify-center space-x-2 mb-2">
-              <Trophy size={20} className="text-purple-500" />
+              <Trophy size={20} className="text-yellow-600" />
               <span className="font-medium text-gray-700 dark:text-gray-300">
                 Items Completed
               </span>
@@ -112,7 +112,7 @@ const CompletionModal = ({
           >
             <div className="flex items-center justify-center space-x-2">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
-                <span className="text-white font-bold">🔥</span>
+                <Flame size={16} className="text-white fill-white" />
               </div>
               <span className="font-semibold text-gray-900 dark:text-white">
                 Streak increased to {stats.currentStreak} days!
@@ -145,7 +145,7 @@ const CompletionModal = ({
           Tip: Try adjusting timer duration for each item next time!
         </p>
       </div>
-    </Modal>
+    </Modal >
   );
 };
 

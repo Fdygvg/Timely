@@ -1,22 +1,22 @@
 import { Loader2 } from 'lucide-react';
 
-const Button = ({ 
-  children, 
-  onClick, 
-  type = 'button', 
+const Button = ({
+  children,
+  onClick,
+  type = 'button',
   variant = 'primary',
   size = 'medium',
   disabled = false,
   loading = false,
   className = '',
   fullWidth = false,
-  ...props 
+  ...props
 }) => {
   const baseStyles = 'font-semibold rounded-xl transition-all duration-200 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2';
-  
+
   const variants = {
-    primary: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 focus:ring-blue-500 shadow-lg hover:shadow-xl',
-    secondary: 'bg-white dark:bg-gray-800 border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 focus:ring-blue-400',
+    primary: 'bg-gradient-to-r from-green-600 to-yellow-600 text-white hover:from-green-700 hover:to-yellow-700 focus:ring-green-500 shadow-lg hover:shadow-xl',
+    secondary: 'bg-white dark:bg-gray-800 border-2 border-green-500 text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 focus:ring-green-400',
     danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
     ghost: 'bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:ring-gray-400',
     success: 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500',

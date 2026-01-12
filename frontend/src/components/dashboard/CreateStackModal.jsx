@@ -60,21 +60,20 @@ const CreateStackModal = ({
   };
 
   const handleTestVibration = () => {
-    const pattern = Array(vibrations).fill(100);
+    if (vibrations === 0) return;
+    const pattern = [];
+    for (let i = 0; i < vibrations; i++) {
+      pattern.push(200);
+      if (i < vibrations - 1) pattern.push(100);
+    }
     vibrate(pattern);
   };
 
   const handleTestSound = () => {
-    if (sound === 'ding') {
-      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/286/286-preview.mp3');
-      audio.play();
-    } else if (sound === 'bell') {
-      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/287/287-preview.mp3');
-      audio.play();
-    } else if (sound === 'chime') {
-      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/288/288-preview.mp3');
-      audio.play();
-    }
+    if (sound === 'none') return;
+
+    const audio = new Audio(`/sounds/${sound}.mp3`);
+    audio.play().catch(e => console.error('Error playing sound:', e));
   };
 
   const handleAddItem = () => {
@@ -174,7 +173,7 @@ const CreateStackModal = ({
                 <button
                   type="button"
                   onClick={handleUseTodayDate}
-                  className="flex items-center space-x-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                  className="flex items-center space-x-1 text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
                 >
                   <Calendar size={14} />
                   <span>Use Today's Date</span>
@@ -185,7 +184,7 @@ const CreateStackModal = ({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g., Morning Focus, Study Session"
-                className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 transition-all`}
+                className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-400 transition-all`}
                 maxLength={100}
               />
               {errors.name && (
@@ -206,7 +205,7 @@ const CreateStackModal = ({
                 onChange={(e) => setNote(e.target.value)}
                 placeholder="Add a description or notes about this stack..."
                 rows={3}
-                className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border ${errors.note ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 transition-all resize-none`}
+                className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border ${errors.note ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-400 transition-all resize-none`}
                 maxLength={500}
               />
               {errors.note && (
@@ -238,7 +237,7 @@ const CreateStackModal = ({
                     step="5"
                     value={duration}
                     onChange={(e) => setDuration(parseInt(e.target.value))}
-                    className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"
+                    className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-green-500"
                   />
                   <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
                     <span>5s</span>
@@ -248,8 +247,8 @@ const CreateStackModal = ({
                     <span>5m</span>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                  <Clock size={20} className="text-blue-600 dark:text-blue-400" />
+                <div className="flex items-center space-x-2 px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                  <Clock size={20} className="text-green-600 dark:text-green-400" />
                   <span className="text-xl font-bold text-gray-900 dark:text-white">
                     {duration}s
                   </span>
@@ -269,7 +268,7 @@ const CreateStackModal = ({
                 <button
                   type="button"
                   onClick={handleTestVibration}
-                  className="flex items-center space-x-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
+                  className="flex items-center space-x-1 text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
                 >
                   <Vibrate size={14} />
                   <span>Test</span>
@@ -282,7 +281,7 @@ const CreateStackModal = ({
                     type="button"
                     onClick={() => setVibrations(count)}
                     className={`px-4 py-2 rounded-lg transition-all ${vibrations === count
-                      ? 'bg-blue-500 text-white shadow-md'
+                      ? 'bg-green-500 text-white shadow-md'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                       }`}
                   >
@@ -304,7 +303,7 @@ const CreateStackModal = ({
                   disabled={sound === 'none'}
                   className={`flex items-center space-x-1 text-sm ${sound === 'none'
                     ? 'text-gray-400 dark:text-gray-600 cursor-not-allowed'
-                    : 'text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300'
+                    : 'text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300'
                     }`}
                 >
                   <Volume2 size={14} />
@@ -318,7 +317,7 @@ const CreateStackModal = ({
                     type="button"
                     onClick={() => setSound(option.value)}
                     className={`flex flex-col items-center justify-center p-4 rounded-xl transition-all ${sound === option.value
-                      ? 'bg-blue-500 text-white shadow-md'
+                      ? 'bg-green-500 text-white shadow-md'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                       }`}
                   >
@@ -357,7 +356,7 @@ const CreateStackModal = ({
               <div className="space-y-3 max-h-60 overflow-y-auto pr-2">
                 {items.map((item, index) => (
                   <div key={index} className="flex items-start space-x-3">
-                    <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold rounded-full mt-3">
+                    <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 font-bold rounded-full mt-3">
                       {index + 1}
                     </div>
                     <div className="flex-1 space-y-2">
@@ -366,7 +365,7 @@ const CreateStackModal = ({
                         onChange={(e) => handleItemChange(index, e.target.value)}
                         placeholder={`Item ${index + 1}...`}
                         rows={2}
-                        className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border ${errors[`item-${index}`] ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 transition-all resize-none`}
+                        className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border ${errors[`item-${index}`] ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-400 transition-all resize-none`}
                         maxLength={500}
                       />
                       {errors[`item-${index}`] && (

@@ -55,7 +55,8 @@ export const copyToClipboard = async (text) => {
 
 // Vibrate phone (if supported)
 export const vibrate = (pattern = 200) => {
-  if (navigator.vibrate) {
+  console.log('Vibrating with pattern:', pattern);
+  if (typeof navigator !== 'undefined' && navigator.vibrate) {
     navigator.vibrate(pattern);
   }
 };

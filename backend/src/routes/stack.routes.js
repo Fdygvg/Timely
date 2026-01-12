@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { auth } = require('../middleware/auth');
-const { validate, stackValidation } = require('../middleware/validation');
+const { validate, stackValidation, updateStackValidation } = require('../middleware/validation');
 const {
   getStacks,
   getStack,
@@ -20,7 +20,7 @@ router.use(auth);
 router.get('/', getStacks);
 router.get('/:id', getStack);
 router.post('/', validate(stackValidation), createStack);
-router.patch('/:id', validate(stackValidation), updateStack);
+router.patch('/:id', validate(updateStackValidation), updateStack);
 router.delete('/:id', deleteStack);
 
 // Stack items

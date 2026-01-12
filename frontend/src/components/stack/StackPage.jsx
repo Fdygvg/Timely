@@ -175,7 +175,7 @@ const StackPage = () => {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Loading stack...</p>
         </div>
       </div>
@@ -200,7 +200,7 @@ const StackPage = () => {
         <div>
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-2"
+            className="flex items-center text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 mb-2"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Dashboard
@@ -240,7 +240,7 @@ const StackPage = () => {
         {!addingItem ? (
           <button
             onClick={() => setAddingItem(true)}
-            className="w-full p-8 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl hover:border-blue-500 dark:hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400"
+            className="w-full p-8 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-2xl hover:border-green-500 dark:hover:border-green-500 hover:bg-green-50/50 dark:hover:bg-green-900/10 transition-all flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400"
           >
             <Plus size={32} className="mb-2" />
             <span className="text-lg font-medium">Add Item</span>
@@ -250,12 +250,12 @@ const StackPage = () => {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl border border-blue-200 dark:border-blue-800"
+            className="p-6 bg-gradient-to-r from-green-50 to-yellow-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl border border-green-200 dark:border-green-800"
           >
             <textarea
               value={newItemText}
               onChange={(e) => setNewItemText(e.target.value)}
-              className="w-full px-4 py-3 bg-white dark:bg-gray-900 border-2 border-blue-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none mb-4"
+              className="w-full px-4 py-3 bg-white dark:bg-gray-900 border-2 border-green-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 resize-none mb-4"
               placeholder="Type your point or focus item here..."
               rows={3}
               autoFocus
@@ -310,8 +310,8 @@ const StackPage = () => {
       {/* Empty State */}
       {stack.items.length === 0 && (
         <div className="text-center py-12">
-          <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full flex items-center justify-center">
-            <Plus size={48} className="text-blue-500 dark:text-blue-400" />
+          <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-green-100 to-yellow-100 dark:from-green-900/20 dark:to-yellow-900/20 rounded-full flex items-center justify-center">
+            <Plus size={48} className="text-green-500 dark:text-green-400" />
           </div>
           <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
             No items yet
@@ -330,7 +330,7 @@ const StackPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-xl shadow-lg z-50"
+          className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-yellow-500 text-white px-6 py-3 rounded-xl shadow-lg z-50"
         >
           <p className="text-center font-medium">
             Click another item to swap positions

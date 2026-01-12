@@ -29,7 +29,7 @@ const registerValidation = [
     .withMessage('Username must be between 2 and 30 characters')
     .matches(/^[a-zA-Z0-9_\- ]+$/)
     .withMessage('Username can only contain letters, numbers, spaces, hyphens and underscores'),
-  
+
   body('avatar')
     .optional()
     .isString()
@@ -45,23 +45,57 @@ const stackValidation = [
     .withMessage('Stack name is required')
     .isLength({ max: 100 })
     .withMessage('Stack name cannot exceed 100 characters'),
-  
+
   body('note')
     .optional()
     .trim()
     .isLength({ max: 500 })
     .withMessage('Note cannot exceed 500 characters'),
-  
+
   body('defaultDuration')
     .optional()
     .isInt({ min: 5, max: 3600 })
     .withMessage('Duration must be between 5 and 3600 seconds'),
-  
+
   body('items')
     .optional()
     .isArray()
     .withMessage('Items must be an array'),
-  
+
+  body('items.*.text')
+    .if(body('items').exists())
+    .trim()
+    .notEmpty()
+    .withMessage('Item text is required')
+    .isLength({ max: 500 })
+    .withMessage('Item text cannot exceed 500 characters')
+];
+
+const updateStackValidation = [
+  body('name')
+    .optional()
+    .trim()
+    .notEmpty()
+    .withMessage('Stack name cannot be empty')
+    .isLength({ max: 100 })
+    .withMessage('Stack name cannot exceed 100 characters'),
+
+  body('note')
+    .optional()
+    .trim()
+    .isLength({ max: 500 })
+    .withMessage('Note cannot exceed 500 characters'),
+
+  body('defaultDuration')
+    .optional()
+    .isInt({ min: 5, max: 3600 })
+    .withMessage('Duration must be between 5 and 3600 seconds'),
+
+  body('items')
+    .optional()
+    .isArray()
+    .withMessage('Items must be an array'),
+
   body('items.*.text')
     .if(body('items').exists())
     .trim()
@@ -79,7 +113,7 @@ const shortcutValidation = [
     .withMessage('Shortcut key must be 1-3 characters')
     .matches(/^[A-Z]+$/)
     .withMessage('Shortcut key can only contain letters'),
-  
+
   body('text')
     .trim()
     .notEmpty()
@@ -92,5 +126,6 @@ module.exports = {
   validate,
   registerValidation,
   stackValidation,
+  updateStackValidation,
   shortcutValidation
 };

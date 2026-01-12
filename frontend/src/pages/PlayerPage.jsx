@@ -37,35 +37,6 @@ const PlayerPage = () => {
     fetchStack();
   }, [stackId]);
 
-  // Timer logic
-  useEffect(() => {
-    if (isPlaying && timeLeft > 0) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft(prev => {
-          if (prev <= 1) {
-            handleTimerEnd();
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    } else {
-      clearInterval(timerRef.current);
-    }
-
-    return () => clearInterval(timerRef.current);
-  }, [isPlaying, timeLeft]);
-
-  // Play sound when timer ends
-  useEffect(() => {
-    if (timeLeft === 0 && isPlaying) {
-      playSound();
-      if (settings.vibrations > 0) {
-        vibrate([100, 50, 100].slice(0, settings.vibrations).flat());
-      }
-    }
-  }, [timeLeft, isPlaying]);
-
   const fetchStack = async () => {
     try {
       setLoading(true);
@@ -98,32 +69,66 @@ const PlayerPage = () => {
     }
   };
 
-  const handleTimerEnd = () => {
-    if (currentIndex < stack.items.length - 1) {
-      // Move to next item
-      const currentItem = stack.items[currentIndex];
-      const durationSpent = totalDuration - timeLeft;
+  const isTransitioningRef = useRef(false);
 
-      setCompletedItems(prev => [
-        ...prev,
-        {
-          text: currentItem.text,
-          duration: durationSpent
+  // Timer logic
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 0) return 0;
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timerRef.current);
+  }, [isPlaying]);
+
+  // Handle End of Timer Actions
+  useEffect(() => {
+    if (timeLeft === 0 && isPlaying && !isTransitioningRef.current) {
+      // 1. Play Effects
+      playSound();
+      if (settings.vibrations > 0) {
+        const pattern = [];
+        for (let i = 0; i < settings.vibrations; i++) {
+          pattern.push(200);
+          if (i < settings.vibrations - 1) pattern.push(100);
         }
-      ]);
+        vibrate(pattern);
+      }
 
-      setTimeout(() => {
-        setCurrentIndex(prev => prev + 1);
-        setTimeLeft(totalDuration);
-        startTimeRef.current = Date.now();
-      }, 500);
-    } else {
-      // Finished all items
-      finishSession();
+      // 2. Handle Transition
+      isTransitioningRef.current = true;
+
+      if (currentIndex < stack.items.length - 1) {
+        const currentItem = stack.items[currentIndex];
+
+        setCompletedItems(prev => [
+          ...prev,
+          {
+            text: currentItem?.text,
+            duration: totalDuration
+          }
+        ]);
+
+        setTimeout(() => {
+          setCurrentIndex(prev => prev + 1);
+          setTimeLeft(totalDuration);
+          startTimeRef.current = Date.now();
+          isTransitioningRef.current = false;
+        }, 500);
+      } else {
+        finishSession();
+        isTransitioningRef.current = false;
+      }
     }
-  };
+  }, [timeLeft, isPlaying, currentIndex, stack, totalDuration, settings]);
 
   const handleSkip = () => {
+    if (isTransitioningRef.current) return;
+
     if (currentIndex < stack.items.length - 1) {
       const durationSpent = totalDuration - timeLeft;
       setCompletedItems(prev => [
@@ -217,7 +222,7 @@ const PlayerPage = () => {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-green-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Loading player...</p>
         </div>
       </div>
@@ -230,7 +235,7 @@ const PlayerPage = () => {
   const isLastItem = currentIndex === stack.items.length - 1;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-blue-50 dark:from-gray-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-green-50 dark:from-gray-900 dark:to-slate-800">
       {/* Audio element */}
       <audio ref={audioRef} preload="auto">
         <source src={`/sounds/${settings.sound}.mp3`} type="audio/mpeg" />
@@ -241,7 +246,7 @@ const PlayerPage = () => {
       <div className="container mx-auto px-4 py-6">
         <button
           onClick={() => navigate('/dashboard')}
-          className="flex items-center text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 mb-4"
+          className="flex items-center text-gray-600 dark:text-gray-400 hover:text-green-600 dark:hover:text-green-400 mb-4"
         >
           <Home size={20} className="mr-2" />
           Dashboard
@@ -293,7 +298,7 @@ const PlayerPage = () => {
             <div className="mb-8">
               <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                  className="h-full bg-gradient-to-r from-green-500 to-yellow-500"
                   initial={{ width: '0%' }}
                   animate={{ width: `${progressPercentage}%` }}
                   transition={{ duration: 1 }}
@@ -317,9 +322,9 @@ const PlayerPage = () => {
 
                 <button
                   onClick={togglePlay}
-                  className="w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105"
+                  className="w-24 h-24 rounded-full bg-gradient-to-r from-green-500 to-yellow-600 text-white shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 flex items-center justify-center"
                 >
-                  {isPlaying ? <Pause size={40} className="mx-auto" /> : <Play size={40} className="mx-auto ml-1" />}
+                  {isPlaying ? <Pause size={40} /> : <Play size={40} className="ml-1" />}
                 </button>
 
                 <button
@@ -399,10 +404,10 @@ const PlayerPage = () => {
                 key={currentIndex}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 shadow-lg"
+                className="p-8 bg-gradient-to-r from-green-50 to-yellow-50 dark:from-green-900/20 dark:to-yellow-900/20 rounded-2xl border-2 border-green-200 dark:border-green-800 shadow-lg"
               >
                 <div className="text-center mb-4">
-                  <span className="inline-block px-4 py-1 bg-blue-500 text-white rounded-full text-sm font-semibold">
+                  <span className="inline-block px-4 py-1 bg-green-500 text-white rounded-full text-sm font-semibold">
                     Item {currentIndex + 1}
                   </span>
                 </div>

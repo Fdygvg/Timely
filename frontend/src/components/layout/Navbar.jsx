@@ -71,7 +71,7 @@ const Navbar = () => {
                 alt="Timely Logo"
                 className="w-10 h-10 rounded-xl shadow-lg border border-white/20"
               />
-              <span className="hidden sm:block text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+              <span className="hidden sm:block text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-yellow-600 dark:from-green-400 dark:to-yellow-400">
                 Timely
               </span>
             </Link>
@@ -86,7 +86,7 @@ const Navbar = () => {
               <Link
                 to="/"
                 className={`px-3 py-2 rounded-lg transition-colors ${isActive('/')
-                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                  ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
               >
                 <div className="flex items-center space-x-2">
@@ -99,7 +99,7 @@ const Navbar = () => {
                 <Link
                   to="/dashboard"
                   className={`px-3 py-2 rounded-lg transition-colors ${isActive('/dashboard')
-                    ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                    ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
                 >
                   <div className="flex items-center space-x-2">
@@ -126,7 +126,7 @@ const Navbar = () => {
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                   className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-yellow-600 flex items-center justify-center text-white">
                     {(() => {
                       const Icon = iconMap[avatarIcons[user.avatar]] || User;
                       return <Icon size={16} />;
@@ -166,7 +166,7 @@ const Navbar = () => {
             ) : (
               <button
                 onClick={() => navigate('/')}
-                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition-colors"
+                className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors"
               >
                 Get Started
               </button>
@@ -199,7 +199,7 @@ const Navbar = () => {
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl transition-colors ${isActive('/')
-                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                  ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
               >
                 <div className="flex items-center space-x-3">
@@ -214,7 +214,7 @@ const Navbar = () => {
                     to="/dashboard"
                     onClick={() => setMobileMenuOpen(false)}
                     className={`px-4 py-3 rounded-xl transition-colors ${isActive('/dashboard')
-                      ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+                      ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                       : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
                   >
                     <div className="flex items-center space-x-3">
@@ -225,7 +225,7 @@ const Navbar = () => {
 
                   <div className="px-4 py-3">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-yellow-600 flex items-center justify-center text-white">
                         {(() => {
                           const Icon = iconMap[avatarIcons[user.avatar]] || User;
                           return <Icon size={20} />;
@@ -256,7 +256,7 @@ const Navbar = () => {
                     navigate('/');
                     setMobileMenuOpen(false);
                   }}
-                  className="px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition-colors text-center"
+                  className="px-4 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-colors text-center"
                 >
                   Get Started
                 </button>

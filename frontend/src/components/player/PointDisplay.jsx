@@ -18,7 +18,7 @@ const PointDisplay = ({
           </h3>
           <ChevronDown size={20} className="text-gray-400" />
         </div>
-        
+
         <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2">
           <AnimatePresence>
             {upcomingItems.slice(0, 5).map((item, index) => (
@@ -43,7 +43,7 @@ const PointDisplay = ({
               </motion.div>
             ))}
           </AnimatePresence>
-          
+
           {upcomingItems.length === 0 && (
             <div className="p-4 text-center text-gray-400 dark:text-gray-500 italic text-sm">
               No more items
@@ -55,40 +55,39 @@ const PointDisplay = ({
       {/* Current Item */}
       <div className="lg:col-span-1">
         <div className="text-center mb-4">
-          <span className="inline-block px-4 py-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-sm font-semibold">
+          <span className="inline-block px-4 py-1 bg-gradient-to-r from-green-500 to-yellow-600 text-white rounded-full text-sm font-semibold">
             {currentIndex + 1} of {totalItems}
           </span>
         </div>
-        
+
         <motion.div
           key={currentIndex}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', stiffness: 200 }}
-          className="p-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-blue-200 dark:border-blue-800 shadow-lg min-h-[300px] flex flex-col justify-center"
+          className="p-8 bg-gradient-to-br from-green-50 to-yellow-50 dark:from-green-900/20 dark:to-yellow-900/20 rounded-2xl border-2 border-green-200 dark:border-green-800 shadow-lg min-h-[300px] flex flex-col justify-center"
         >
           <div className="relative">
             {/* Decorative elements */}
-            <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-blue-500/20"></div>
-            <div className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-purple-500/20"></div>
-            
+            <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-green-500/20"></div>
+            <div className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-yellow-500/20"></div>
+
             <p className="text-2xl md:text-3xl text-gray-900 dark:text-white leading-relaxed whitespace-pre-wrap text-center">
               {currentItem?.text}
             </p>
-            
+
             {/* Progress indicator */}
             <div className="flex justify-center mt-6">
               <div className="flex items-center space-x-1">
                 {Array.from({ length: Math.min(totalItems, 10) }).map((_, index) => (
                   <div
                     key={index}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentIndex % 10
-                        ? 'bg-blue-500 w-4'
+                    className={`w-2 h-2 rounded-full transition-all ${index === currentIndex % 10
+                        ? 'bg-green-500 w-4'
                         : index < currentIndex % 10
-                        ? 'bg-blue-300 dark:bg-blue-600'
-                        : 'bg-gray-300 dark:bg-gray-700'
-                    }`}
+                          ? 'bg-green-300 dark:bg-green-600'
+                          : 'bg-gray-300 dark:bg-gray-700'
+                      }`}
                   />
                 ))}
               </div>
@@ -105,7 +104,7 @@ const PointDisplay = ({
           </h3>
           <ChevronUp size={20} className="text-gray-400" />
         </div>
-        
+
         <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2">
           <AnimatePresence>
             {previousItems.slice(-5).reverse().map((item, index) => (
@@ -139,7 +138,7 @@ const PointDisplay = ({
               </motion.div>
             ))}
           </AnimatePresence>
-          
+
           {previousItems.length === 0 && (
             <div className="p-4 text-center text-gray-400 dark:text-gray-500 italic text-sm">
               No previous items yet

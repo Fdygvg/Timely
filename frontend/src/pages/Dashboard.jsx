@@ -161,7 +161,7 @@ const Dashboard = () => {
             placeholder="Search stacks..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400"
+            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-400"
           />
         </div>
 
@@ -172,7 +172,7 @@ const Dashboard = () => {
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400"
+              className="bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-400"
             >
               <option value="all">All Stacks</option>
               <option value="active">Active</option>
@@ -186,13 +186,13 @@ const Dashboard = () => {
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-white dark:bg-gray-800 shadow-sm' : ''}`}
             >
-              <Grid size={18} className={viewMode === 'grid' ? 'text-blue-500' : 'text-gray-500'} />
+              <Grid size={18} className={viewMode === 'grid' ? 'text-green-500' : 'text-gray-500'} />
             </button>
             <button
               onClick={() => setViewMode('list')}
               className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-white dark:bg-gray-800 shadow-sm' : ''}`}
             >
-              <List size={18} className={viewMode === 'list' ? 'text-blue-500' : 'text-gray-500'} />
+              <List size={18} className={viewMode === 'list' ? 'text-green-500' : 'text-gray-500'} />
             </button>
           </div>
         </div>
@@ -207,8 +207,8 @@ const Dashboard = () => {
         </div>
       ) : filteredStacks.length === 0 ? (
         <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700">
-          <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mx-auto mb-4">
-            <Calendar size={32} className="text-blue-500 dark:text-blue-400" />
+          <div className="w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-4">
+            <Calendar size={32} className="text-green-500 dark:text-green-400" />
           </div>
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             No stacks found
@@ -246,6 +246,7 @@ const Dashboard = () => {
               >
                 <StackCard
                   stack={stack}
+                  viewMode={viewMode}
                   onEdit={handleEditStack}
                   onDelete={handleDeleteStack}
                   onArchive={handleArchiveStack}

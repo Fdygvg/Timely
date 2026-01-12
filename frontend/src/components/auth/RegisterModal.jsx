@@ -95,9 +95,9 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
                 </ul>
               </div>
 
-              <div className="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
-                <Check size={20} className="text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-blue-800 dark:text-blue-300 text-left">
+              <div className="flex items-start space-x-3 p-4 bg-green-50 dark:bg-green-900/30 rounded-xl">
+                <Check size={20} className="text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-green-800 dark:text-green-300 text-left">
                   <strong>Recommended:</strong> Use a password manager like Bitwarden, 1Password, or your phone's secure notes to save the token.
                 </p>
               </div>
@@ -131,8 +131,8 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
             {/* Loading State */}
             <div className="text-center space-y-6">
               <div className="flex justify-center">
-                <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center animate-pulse">
-                  <div className="w-12 h-12 rounded-full bg-blue-500 animate-ping" />
+                <div className="w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center animate-pulse">
+                  <div className="w-12 h-12 rounded-full bg-green-500 animate-ping" />
                 </div>
               </div>
 
@@ -146,7 +146,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
 
                 <div className="space-y-2">
                   <div className="h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-blue-500 animate-[progress_2s_ease-in-out_infinite]" />
+                    <div className="h-full bg-green-500 animate-[progress_2s_ease-in-out_infinite]" />
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     This may take a moment
@@ -223,7 +223,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
             </div>
 
             {/* Save Confirmation */}
-            <div className="flex items-start space-x-3 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl">
+            <div className="flex items-start space-x-3 p-4 bg-green-50 dark:bg-green-900/30 rounded-xl">
               <input
                 type="checkbox"
                 id="saved"
@@ -231,7 +231,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
                 onChange={(e) => setSavedWarning(e.target.checked)}
                 className="mt-1"
               />
-              <label htmlFor="saved" className="text-sm text-blue-800 dark:text-blue-300">
+              <label htmlFor="saved" className="text-sm text-green-800 dark:text-green-300">
                 <strong>I have saved my token securely</strong> (required)
                 <p className="mt-1 text-xs">I understand that losing this token means permanent account loss with no recovery options.</p>
               </label>
@@ -275,7 +275,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
                     onClose();
                     onSwitchToLogin();
                   }}
-                  className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+                  className="text-green-600 dark:text-green-400 font-semibold hover:underline"
                 >
                   Login here
                 </button>

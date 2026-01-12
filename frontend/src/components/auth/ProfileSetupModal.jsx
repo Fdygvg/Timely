@@ -74,7 +74,7 @@ const ProfileSetupModal = ({ isOpen, onClose, onSuccess }) => {
         <div className="space-y-6">
           {/* Welcome Message */}
           <div className="text-center">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-yellow-600 flex items-center justify-center mx-auto mb-4">
               <User size={32} className="text-white" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
@@ -99,7 +99,7 @@ const ProfileSetupModal = ({ isOpen, onClose, onSuccess }) => {
                     type="button"
                     onClick={() => setSelectedAvatar(avatar)}
                     className={`aspect-square rounded-xl border-2 flex items-center justify-center transition-all ${selectedAvatar === avatar
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 scale-105 text-blue-600 dark:text-blue-400'
+                      ? 'border-green-500 bg-green-50 dark:bg-green-900/30 scale-105 text-green-600 dark:text-green-400'
                       : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-400'
                       }`}
                   >
@@ -120,7 +120,7 @@ const ProfileSetupModal = ({ isOpen, onClose, onSuccess }) => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your display name"
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 transition-all"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:ring-green-400 transition-all"
               maxLength={30}
             />
             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -141,7 +141,7 @@ const ProfileSetupModal = ({ isOpen, onClose, onSuccess }) => {
               Preview
             </p>
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-yellow-600 flex items-center justify-center text-white">
                 {(() => {
                   const Icon = iconMap[avatarIcons[selectedAvatar]];
                   return <Icon size={24} />;
