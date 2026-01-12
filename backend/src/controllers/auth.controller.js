@@ -30,10 +30,12 @@ const register = async (req, res) => {
   try {
     // Generate a secure token
     const rawToken = generateSecureToken(64); // 64 bytes = 128 hex chars
+    const tokenPrefix = rawToken.substring(0, 16); // First 16 chars for fast lookup
 
-    // Create user with hashed token
+    // Create user with hashed token and prefix
     const user = new User({
-      hashedToken: rawToken // Will be hashed by pre-save middleware
+      hashedToken: rawToken, // Will be hashed by pre-save middleware
+      tokenPrefix: tokenPrefix
     });
 
     await user.save();
@@ -74,20 +76,19 @@ const login = async (req, res) => {
       });
     }
 
-    // Find user by comparing hashed tokens
-    const users = await User.find({});
-    let user = null;
-
-    // Need to check all users since token is hashed
-    for (const u of users) {
-      const isMatch = await u.compareToken(token);
-      if (isMatch) {
-        user = u;
-        break;
-      }
-    }
+    // Fast lookup using token prefix, then verify with bcrypt
+    const tokenPrefix = token.substring(0, 16);
+    const user = await User.findOne({ tokenPrefix });
 
     if (!user) {
+      return res.status(401).json({
+        error: 'Invalid token. Please check and try again.'
+      });
+    }
+
+    // Verify full token with bcrypt
+    const isMatch = await user.compareToken(token);
+    if (!isMatch) {
       return res.status(401).json({
         error: 'Invalid token. Please check and try again.'
       });
