@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">ST</span>
+              <span className="text-white font-bold text-sm">T</span>
             </div>
             <div>
               <h3 className="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">

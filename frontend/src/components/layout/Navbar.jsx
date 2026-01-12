@@ -1,7 +1,19 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, User, LogOut, Home, Grid } from 'lucide-react';
+import {
+  Sun, Moon, Menu, X, User, LogOut, Home, Grid,
+  Zap, Target, Rocket, Brain, Flame, Heart,
+  Star, Coffee, Laptop, Book, Music
+} from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
+import { avatarIcons } from '../../utils/helpers';
+
+const iconMap = {
+  User, Zap, Target, Rocket,
+  Brain, Flame, Heart, Star, Coffee,
+  Laptop, Book, Music
+};
+
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -48,20 +60,24 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center space-x-3"
-          >
-            <img
-              src="/logo.png"
-              alt="Timely Logo"
-              className="w-10 h-10 rounded-xl shadow-lg border border-white/20"
-            />
-            <span className="hidden sm:block text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
-              Timely
-            </span>
-          </Link>
+          {/* Logo - Hidden on Home page */}
+          {location.pathname !== '/' ? (
+            <Link
+              to="/"
+              className="flex items-center space-x-3"
+            >
+              <img
+                src="/logo.png"
+                alt="Timely Logo"
+                className="w-10 h-10 rounded-xl shadow-lg border border-white/20"
+              />
+              <span className="hidden sm:block text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+                Timely
+              </span>
+            </Link>
+          ) : (
+            <div className="w-10 h-10" /> // Maintain spacing if needed, or just remove
+          )}
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
@@ -110,10 +126,11 @@ const Navbar = () => {
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                   className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                    <span className="text-white font-bold text-sm">
-                      {user.username?.[0]?.toUpperCase() || 'U'}
-                    </span>
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                    {(() => {
+                      const Icon = iconMap[avatarIcons[user.avatar]] || User;
+                      return <Icon size={16} />;
+                    })()}
                   </div>
                   <span className="text-gray-700 dark:text-gray-300 font-medium">
                     {user.username || 'User'}
@@ -208,10 +225,11 @@ const Navbar = () => {
 
                   <div className="px-4 py-3">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                        <span className="text-white font-bold">
-                          {user.username?.[0]?.toUpperCase() || 'U'}
-                        </span>
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                        {(() => {
+                          const Icon = iconMap[avatarIcons[user.avatar]] || User;
+                          return <Icon size={20} />;
+                        })()}
                       </div>
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white">

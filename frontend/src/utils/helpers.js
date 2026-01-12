@@ -26,6 +26,22 @@ export const getRandomAvatar = () => {
   return `avatar${Math.floor(Math.random() * 12) + 1}`;
 };
 
+// Avatar icons map
+export const avatarIcons = {
+  avatar1: 'User',
+  avatar2: 'Zap',
+  avatar3: 'Target',
+  avatar4: 'Rocket',
+  avatar5: 'Brain',
+  avatar6: 'Flame',
+  avatar7: 'Heart',
+  avatar8: 'Star',
+  avatar9: 'Coffee',
+  avatar10: 'Laptop',
+  avatar11: 'Book',
+  avatar12: 'Music'
+};
+
 // Copy text to clipboard
 export const copyToClipboard = async (text) => {
   try {
@@ -65,15 +81,15 @@ export const isValidToken = (token) => {
 // Calculate streak
 export const calculateStreak = (lastActive) => {
   if (!lastActive) return 0;
-  
+
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  
+
   const lastActiveDate = new Date(lastActive);
   lastActiveDate.setHours(0, 0, 0, 0);
-  
+
   const diffTime = today.getTime() - lastActiveDate.getTime();
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  
+
   return diffDays === 0 ? 1 : diffDays === 1 ? 1 : 0;
 };

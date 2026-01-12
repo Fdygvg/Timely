@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react';
-import { User, Check, X } from 'lucide-react';
+import {
+  User, Check, X, Zap, Target, Rocket,
+  Brain, Flame, Heart, Star, Coffee,
+  Laptop, Book, Music
+} from 'lucide-react';
 import Modal from '../layout/Modal';
 import Button from '../layout/Button';
 import { useAuth } from '../../hooks/useAuth';
-import { getRandomAvatar } from '../../utils/helpers';
+import { getRandomAvatar, avatarIcons } from '../../utils/helpers';
+
+const iconMap = {
+  User, Zap, Target, Rocket,
+  Brain, Flame, Heart, Star, Coffee,
+  Laptop, Book, Music
+};
 
 const ProfileSetupModal = ({ isOpen, onClose, onSuccess }) => {
   const [username, setUsername] = useState('');
@@ -81,19 +91,22 @@ const ProfileSetupModal = ({ isOpen, onClose, onSuccess }) => {
               Choose an Avatar
             </label>
             <div className="grid grid-cols-6 gap-3">
-              {avatars.map(avatar => (
-                <button
-                  key={avatar}
-                  type="button"
-                  onClick={() => setSelectedAvatar(avatar)}
-                  className={`aspect-square rounded-xl border-2 flex items-center justify-center text-xl font-bold transition-all ${selectedAvatar === avatar
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 scale-105'
-                    : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
-                    }`}
-                >
-                  {avatar.replace('avatar', '')}
-                </button>
-              ))}
+              {avatars.map(avatar => {
+                const Icon = iconMap[avatarIcons[avatar]];
+                return (
+                  <button
+                    key={avatar}
+                    type="button"
+                    onClick={() => setSelectedAvatar(avatar)}
+                    className={`aspect-square rounded-xl border-2 flex items-center justify-center transition-all ${selectedAvatar === avatar
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 scale-105 text-blue-600 dark:text-blue-400'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-400'
+                      }`}
+                  >
+                    <Icon size={24} />
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -128,8 +141,11 @@ const ProfileSetupModal = ({ isOpen, onClose, onSuccess }) => {
               Preview
             </p>
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
-                {selectedAvatar.replace('avatar', '')}
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                {(() => {
+                  const Icon = iconMap[avatarIcons[selectedAvatar]];
+                  return <Icon size={24} />;
+                })()}
               </div>
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">
